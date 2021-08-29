@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | Interactive pricing component</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="title">
+  <h1>Simple,traffic-based pricing</h1>
+  <p>sign-up for our 30-day trial. No credit card required</p>
+  </div>
+  <div class="main">
+    <div class="firstChild">
+      <p>100K PAGEVIEWS</p>
+     <div class="price">
+      <span id="dollar">$16.00</span>
+      <p>/month</p>
+     </div>
+    </div>
+    <input type="range" min="0.00" max="40.00" step="5.00" name="range" id="range">
+    <div class="phone">
+      <span id="phonePrice">16.00</span>
+      <span>/month</span>
+    </div>
+    <div class="toggleDiv">
+      <span>Monthly Billing</span>
+      <label class="switch">
+        <input id="check" type="checkbox">
+        <span class="slider round"></span>
+      </label>
+      <span>Yearly Billing</span>
+      <span id="discount">25% discount</span>
+      <span id="phoneDis">-25%</span>
+    </div>
+    <hr>
+    <div class="bot">
+      <div class="ticks">
+        <div class="tickLine">
+          <img src="./images/icon-check.svg" alt="">
+          <span>Unlimitaed websites</span>
+        </div>
+        <div class="tickLine">
+          <img src="./images/icon-check.svg" alt="">
+          <span>100$ data ownership</span>
+        </div>
+        <div class="tickLine">
+          <img src="./images/icon-check.svg" alt="">
+          <span>Email Reports</span>
+        </div>
+      </div>
+    <button>Start my trial</button>
+
+    </div>
+  </div>
+  <script>
+    const input =  document.querySelector('#range')
+    const phonePrice = document.querySelector('#phonePrice')
+    const dollar = document.querySelector('#dollar')
+    const box = document.querySelector('#check')
+    let drag = 2.5 
+    let behind = 2
+    input.addEventListener('input', (e) =>{
+      e.target.style.backgroundImage = `
+      linear-gradient(to right, hsl(174, 86%, 45%) ${e.target.value*drag}%, hsl(224, 65%, 95%) ${e.target.value/behind}%)
+      `
+      dollar.innerText = `$${e.target.value}.00`
+      phonePrice.innerText = `$${e.target.value}.00`
+    })
+    box.addEventListener('change', e => {
+      if(box.checked){
+        input.setAttribute('max', '100.00')
+     
+        dollar.innerText = `$${input.value}.00`
+        phonePrice.innerText = `$${input.value}.00`
+        drag = 1
+        behind = 1
+        input.style.backgroundImage = `
+      linear-gradient(to right, hsl(174, 86%, 45%) ${input.value*drag}%, hsl(224, 65%, 95%) ${input.value/behind}%)
+      `
+      }else{
+        input.setAttribute('max', '40.00')
+        dollar.innerText = `$${input.value}.00`
+        phonePrice.innerText = `$${input.value}.00`
+        drag = 2.5
+        behind = 2
+        input.style.backgroundImage = `
+      linear-gradient(to right, hsl(174, 86%, 45%) ${input.value*drag}%, hsl(224, 65%, 95%) ${input.value/behind}%)
+      `
+      }
+    })
+  </script>
+</body>
+</html>
